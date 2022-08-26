@@ -4,6 +4,7 @@
             <header-elem
             class="container-one"
             />
+            <slider-banner />
         </div>
     </div>
 </template>
@@ -11,11 +12,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import HeaderElem from '@/components/header/HeaderElem.vue';
+import SliderBanner from './components/SliderBanner.vue';
 
 export default defineComponent({
     components:{
-        HeaderElem
-    },
+    HeaderElem,
+    SliderBanner
+},
     setup () {
 
 

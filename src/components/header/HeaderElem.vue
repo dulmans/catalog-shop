@@ -5,9 +5,7 @@
             <div class="header-content__block left-content">
                 <div class="logo">
                     <a href="#">
-                        <logo
-                            fill="#1F2020"
-                        />
+                        <logo fill="#1F2020" />
                     </a>
                 </div>
 
@@ -17,23 +15,28 @@
             </div>
 
             <div class="header-content__block right-content">
-                <request-call/>
+                <request-call />
+
+                <action-btns-head />
             </div>
         </div>
     </header>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent } from 'vue';
 import Logo from '@/assets/Logo.vue';
 import NavigationMenu from '@/components/header/NavigationMenu.vue';
 import RequestCall from '@/components/header/RequestCall.vue';
+import ActionBtnsHead from '@/components/header/ActionBtnsHead.vue';
 
 export default defineComponent({
     components: {
         Logo,
         NavigationMenu,
-        RequestCall },
+        RequestCall,
+        ActionBtnsHead
+    },
     setup() {
         return {};
     },
@@ -41,5 +44,31 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-
+.header {
+    background: rgb(255, 255, 255);
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+.header__contain {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.header-content__block {
+    display: flex;
+    align-items: center;
+}
+.left-content {
+    min-width: 50%;
+    justify-content: space-between;
+}
+.logo {
+}
+.navigation {
+}
+.right-content {
+    *:first-child{
+        margin-right: 110px;
+    }
+}
 </style>
