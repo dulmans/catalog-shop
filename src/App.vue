@@ -12,6 +12,12 @@
                     :banners="mainBannerArray"
                 />
             </div>
+            <main class="main__content">
+                <div class="main__content--container container-one">
+                    <catalog-colors />
+                </div>
+            </main>
+            <footer-elem />
         </div>
     </div>
 </template>
@@ -22,6 +28,8 @@ import { defineComponent, ref } from 'vue';
 import HeaderElem from '@/components/header/HeaderElem.vue';
 import SliderBanner from '@/components/slider-banner/SliderBanner.vue';
 import TextPagination from '@/components/slider-banner/TextPagination.vue';
+import FooterElem from '@/components/FooterElem.vue';
+import CatalogColors from '@/components/CatalogColors.vue';
 
 import MainBanner from '@/types/MainBanner';
 import PaginationText from '@/types/PaginationText';
@@ -31,7 +39,9 @@ export default defineComponent({
     components:{
         HeaderElem,
         SliderBanner,
-        TextPagination
+        TextPagination,
+        FooterElem,
+        CatalogColors
     },
     setup () {
         const mainBannerArray:MainBanner[] = [
@@ -53,6 +63,9 @@ export default defineComponent({
             mainBannerArray,
             mainPaginationText
         }
+    },
+    mounted() {
+
     }
 })
 </script>
@@ -81,5 +94,13 @@ a{
 
 .container-one{
     padding: 0 65px;
+}
+
+.main__content {
+    max-height: 100vh;
+    background: rgb(255, 255, 255);
+    .main__content--container {
+        max-height: 100%;
+    }
 }
 </style>

@@ -1,5 +1,5 @@
-// import MyButton from '';
+import CheckboxButton from './CheckboxButton.vue';
 
 export default [
-
+    CheckboxButton
 ];
