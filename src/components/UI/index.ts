@@ -1,5 +1,7 @@
-import CheckboxButton from './CheckboxButton.vue';
+import MyCheckboxButton from './MyCheckboxButton.vue';
+import MyOptionsList from './MyOptionsList.vue';
 
 export default [
-    CheckboxButton
+    MyCheckboxButton,
+    MyOptionsList
 ];

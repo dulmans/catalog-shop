@@ -25,11 +25,11 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 
-import HeaderElem from '@/components/header/HeaderElem.vue';
-import SliderBanner from '@/components/slider-banner/SliderBanner.vue';
+import HeaderElem from '@/components/HeaderElem.vue';
+import SliderBanner from '@/components/SliderBanner.vue';
 import TextPagination from '@/components/slider-banner/TextPagination.vue';
 import FooterElem from '@/components/FooterElem.vue';
-import CatalogColors from '@/components/CatalogColors.vue';
+import CatalogColors from '@/views/CatalogColors.vue';
 
 import MainBanner from '@/types/MainBanner';
 import PaginationText from '@/types/PaginationText';

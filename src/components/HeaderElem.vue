@@ -26,6 +26,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import Logo from '@/assets/Logo.vue';
+
 import NavigationMenu from '@/components/header/NavigationMenu.vue';
 import RequestCall from '@/components/header/RequestCall.vue';
 import ActionBtnsHead from '@/components/header/ActionBtnsHead.vue';

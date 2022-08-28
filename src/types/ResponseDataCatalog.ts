@@ -1,4 +1,6 @@
-export default interface ResponseDataCatalog {
+type CategoryFilter = 'novelty' | 'inStock' | 'contract' | 'exclusive' | 'sales';
+
+interface ResponseDataCatalog {
     id: string,
     mainInfo: {
         title: string,
@@ -9,10 +11,8 @@ export default interface ResponseDataCatalog {
         }
     },
     category: {
-        novelty: boolean,
-        inStock: boolean,
-        contract: boolean,
-        exclusive: boolean,
-        sales: boolean
+        [key in CategoryFilter]: boolean
     }
 };
+
+export {CategoryFilter, ResponseDataCatalog}

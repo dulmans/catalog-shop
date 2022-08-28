@@ -1,10 +1,13 @@
 <template>
     <div class="catalog-page">
-        <aside class="aside__filter-bar">
-            <filter-items
-                :itemLists="presetData?.filter"
-                @updateCheckbox="$emit('switchChecked', $event)"
+        <div class="catalog-header__container">
+            <catalog-header
+                :itemLength="catalogLists?.length"
+                :sortByInfo="presetData?.sort"
             />
+        </div>
+        <aside class="aside__filter-bar">
+            <filter-items :itemLists="presetData?.filter" @updateCheckbox="$emit('switchChecked', $event)" />
         </aside>
     </div>
 </template>
@@ -12,14 +15,18 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 
-import FilterItems from '@/components/FilterItems.vue';
+import FilterItems from '@/components/catalog-block/FilterItems.vue';
+import CatalogHeader from '@/components/catalog-block/CatalogHeader.vue';
 
-import {PresetCatalogOption} from '@/types/PresetCatalogOption';
-import ResponseDataCatalog from '@/types/ResponseDataCatalog';
+import { PresetCatalogOption } from '@/types/PresetCatalogOption';
+import { ResponseDataCatalog } from '@/types/ResponseDataCatalog';
 
 
 export default defineComponent({
-    components: { FilterItems },
+    components: {
+        FilterItems,
+        CatalogHeader
+    },
     props: {
         presetData: {
             type: Object as PropType<PresetCatalogOption>,
@@ -29,13 +36,15 @@ export default defineComponent({
             type: Array as PropType<ResponseDataCatalog[]>
         }
     },
-    setup(props) {
+    setup() {
 
         return {};
     },
 })
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.catalog-page {
+    padding: 75px 0 30px;
+}
 </style>

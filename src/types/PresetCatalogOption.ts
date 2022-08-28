@@ -1,3 +1,5 @@
+type ValueSortLists = 'byHightPrice' | 'byLowPrice' | 'byPopular' | 'byNovelty';
+
 interface PresetCatalogOptionFilter {
     title: string,
     name: string,
@@ -6,8 +8,7 @@ interface PresetCatalogOptionFilter {
 
 interface PresetCatalogOptionSort {
     title: string,
-    value: string,
-    checked?: true
+    value: ValueSortLists,
 };
 
 interface PresetCatalogOption {
@@ -15,4 +16,4 @@ interface PresetCatalogOption {
     sort: PresetCatalogOptionSort[]
 };
 
-export {PresetCatalogOption, PresetCatalogOptionFilter, PresetCatalogOptionSort}
+export {PresetCatalogOption, PresetCatalogOptionFilter, PresetCatalogOptionSort, ValueSortLists}
