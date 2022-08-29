@@ -1,8 +1,9 @@
 <template>
     <CatalogPage
         :presetData="presetOption"
-        :catalogLists="itemsCatalogFilter"
+        :catalogLists="itemsCatalogFilterSort"
         @switchChecked="updateFilterOption"
+        @updateSelect="updateSelectSort"
     />
 </template>
 
@@ -13,7 +14,7 @@ import axios, { AxiosResponse } from 'axios';
 import CatalogPage from '@/components/catalog-block/CatalogPage.vue';
 
 import { ResponseDataCatalog, CategoryFilter } from '@/types/ResponseDataCatalog';
-import { PresetCatalogOption } from '@/types/PresetCatalogOption';
+import { PresetCatalogOption, ValueSortLists } from '@/types/PresetCatalogOption';
 
 export default defineComponent({
     components: {
@@ -26,14 +27,17 @@ export default defineComponent({
                 {title: 'Есть в наличии', name: 'inStock' as CategoryFilter, value: false},
                 {title: 'Контрактные', name: 'contract' as CategoryFilter, value: false},
                 {title: 'Эксклюзивные', name: 'exclusive' as CategoryFilter, value: false},
-                {title: 'Распродажа', name: 'sales' as CategoryFilter, value: false},
+                {title: 'Распродажа', name: 'sales' as CategoryFilter, value: false}
             ],
-            sort: [
-                {title: 'Сначала дорогие', value: 'byHightPrice'},
-                {title: 'Сначала недорогие', value: 'byLowPrice'},
-                {title: 'Сначала популярные', value: 'byPopular'},
-                {title: 'Сначала новые', value: 'byNovelty'}
-            ]
+            sort: {
+                lists: [
+                    {title: 'Сначала дорогие', value: 'byHightPrice'},
+                    {title: 'Сначала недорогие', value: 'byLowPrice'},
+                    {title: 'Сначала популярные', value: 'byPopular'},
+                    {title: 'Сначала новые', value: 'byNovelty'}
+                ],
+                currentValue: 'byHightPrice'
+            }
         });
 
         const itemsCatalog = ref<ResponseDataCatalog[]>([]);
@@ -59,21 +63,51 @@ export default defineComponent({
             });
         });
 
+        const itemsCatalogFilterSort = computed(() => {
+            const currentSort = presetOption.value.sort.currentValue;
+            if(currentSort === 'byHightPrice'){
+                return [...itemsCatalogFilter.value].sort((a, b) => {
+                    return Number(b.mainInfo.price) - Number(a.mainInfo.price);
+                });
+            }
+            else if(currentSort === 'byLowPrice'){
+                return [...itemsCatalogFilter.value].sort((a, b) => {
+                    return Number(a.mainInfo.price) - Number(b.mainInfo.price);
+                });
+            }
+            else if(currentSort === 'byNovelty'){
+                return [...itemsCatalogFilter.value].sort((a, b) => {
+                    return Number(b.category.novelty) - Number(a.category.novelty);
+                });
+            }
+            else{
+                return [...itemsCatalogFilter.value].sort((a, b) => {
+                    return Number(b.category.sales) - Number(a.category.sales);
+                });
+            };
+        })
+
         const getDataCatalog = async ():Promise<ResponseDataCatalog[]> => {
             const response:AxiosResponse = await axios.get('https://6304a3c8761a3bce77ec52e3.mockapi.io/api/v1/products');
             return response?.data;
         };
 
-        const updateFilterOption = (event:number) => {
+        const updateFilterOption = (event:number):void => {
             presetOption.value.filter[event].value = !(presetOption.value.filter[event].value);
-        }
+        };
+
+        const updateSelectSort = (event:ValueSortLists):void => {
+            presetOption.value.sort.currentValue = event;
+        };
 
         return {
             presetOption,
             getDataCatalog,
             itemsCatalog,
             updateFilterOption,
-            itemsCatalogFilter
+            itemsCatalogFilter,
+            updateSelectSort,
+            itemsCatalogFilterSort
         }
     },
     mounted() {

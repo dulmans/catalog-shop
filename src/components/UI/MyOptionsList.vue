@@ -1,10 +1,10 @@
 <template>
     <select
         v-model="selected"
-        @change="updt"
+        @change="$emit('updateSelect', selected)"
     >
         <option
-            v-for="(optionItem, index) in optionLists"
+            v-for="(optionItem, index) in sortOptions?.lists"
             :key="index"
             :value="optionItem.value"
         >
@@ -21,21 +21,15 @@ import { PresetCatalogOptionSort } from '@/types/PresetCatalogOption';
 export default defineComponent({
     name: 'my-options-list',
     props: {
-        optionLists: {
-            type: Array as PropType<PresetCatalogOptionSort[]>,
+        sortOptions: {
+            type: Object as PropType<PresetCatalogOptionSort>,
             requared: true
         }
     },
     setup (props) {
-        const selected = ref(props?.optionLists ? props?.optionLists[0].value : '')
-        const updt = () => {
-            console.log(selected.value);
-            /* !!!
-                ПОДНЯТЬ selected НАВЕРХ, ЗАСТИЛИТЬ СЕЛЕКТ ЛИСТ И СДЕЛАТЬ СОРТИРОВКУ МАССИВА
-            */
-        }
+        const selected = ref(props?.sortOptions?.currentValue);
 
-        return {selected, updt}
+        return {selected}
     }
 })
 </script>

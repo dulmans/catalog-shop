@@ -6,14 +6,19 @@ interface PresetCatalogOptionFilter {
     value: boolean
 };
 
-interface PresetCatalogOptionSort {
+interface PresetCatalogOptionSortItemLists {
     title: string,
     value: ValueSortLists,
 };
 
-interface PresetCatalogOption {
-    filter: PresetCatalogOptionFilter[],
-    sort: PresetCatalogOptionSort[]
+interface PresetCatalogOptionSort {
+    lists: PresetCatalogOptionSortItemLists[],
+    currentValue: ValueSortLists
 };
 
-export {PresetCatalogOption, PresetCatalogOptionFilter, PresetCatalogOptionSort, ValueSortLists}
+interface PresetCatalogOption {
+    filter: PresetCatalogOptionFilter[],
+    sort: PresetCatalogOptionSort
+};
+
+export {PresetCatalogOption, PresetCatalogOptionFilter, PresetCatalogOptionSort, ValueSortLists, PresetCatalogOptionSortItemLists}

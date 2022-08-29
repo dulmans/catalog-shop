@@ -3,7 +3,8 @@
         <span class="catalog-header__count-items">{{itemLength ?? 0}} товаров</span>
         <div class="catalog-header__sort-list">
             <my-options-list
-                :optionLists="sortByInfo"
+                :sortOptions="sortByInfo"
+                @updateSelect="$emit('updateSelect', $event)"
             />
         </div>
     </div>
@@ -20,7 +21,7 @@ export default defineComponent({
             type: Number as PropType<number>
         },
         sortByInfo: {
-            type: Array as PropType<PresetCatalogOptionSort[]>
+            type: Object as PropType<PresetCatalogOptionSort>
         }
     },
     setup () {

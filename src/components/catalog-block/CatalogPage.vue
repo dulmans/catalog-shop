@@ -4,6 +4,7 @@
             <catalog-header
                 :itemLength="catalogLists?.length"
                 :sortByInfo="presetData?.sort"
+                @updateSelect="$emit('updateSelect', $event)"
             />
         </div>
         <aside class="aside__filter-bar">
