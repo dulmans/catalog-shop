@@ -107,6 +107,7 @@ $padding-pagination-bulletLR: 4px;
                 opacity: .2;
                 display: inline-flex;
                 cursor: pointer;
+                box-sizing: unset;
 
                 &::before {
                     content: '';
