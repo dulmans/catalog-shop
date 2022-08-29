@@ -80,6 +80,8 @@ export default defineComponent({
     font-weight: 400;
     font-size: 14px;
     letter-spacing: normal;
+    position: relative;
+    * {box-sizing: border-box;}
 
     .slider-banner{
         position: relative;
@@ -94,6 +96,18 @@ a{
 
 .container-one{
     padding: 0 65px;
+}
+
+.dark-focus-bg {
+    position: absolute;
+    z-index: 98;
+    background: rgba(0, 0, 0, .6);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 .main__content {

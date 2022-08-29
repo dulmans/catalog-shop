@@ -1,17 +1,19 @@
 <template>
     <div class="catalog-header">
+        <div v-if="darkFocus" class="dark-focus-bg"></div>
         <span class="catalog-header__count-items">{{itemLength ?? 0}} товаров</span>
         <div class="catalog-header__sort-list">
             <my-options-list
                 :sortOptions="sortByInfo"
                 @updateSelect="$emit('updateSelect', $event)"
+                v-model:focusControl="darkFocus"
             />
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent, PropType, ref } from 'vue'
 
 import { PresetCatalogOptionSort } from '@/types/PresetCatalogOption';
 
@@ -25,8 +27,9 @@ export default defineComponent({
         }
     },
     setup () {
+        const darkFocus = ref<boolean>(false);
 
-        return {}
+        return { darkFocus }
     }
 })
 </script>
