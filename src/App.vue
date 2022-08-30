@@ -111,10 +111,8 @@ a{
 }
 
 .main__content {
-    max-height: 100vh;
     background: rgb(255, 255, 255);
     .main__content--container {
-        max-height: 100%;
     }
 }
 </style>

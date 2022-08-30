@@ -114,9 +114,8 @@ input {
 
     .item-area {
         cursor: pointer;
-        width: 280px;
-        height: 48px;
         overflow: hidden;
+        width: 280px;
         display: inline-flex;
         align-items: center;
         padding: 0 24px;
@@ -166,6 +165,7 @@ input {
 
     .option-item__area {
         background: rgb(255, 255, 255);
+        height: 48px;
 
         &:hover .text-option__value {
             opacity: .65;

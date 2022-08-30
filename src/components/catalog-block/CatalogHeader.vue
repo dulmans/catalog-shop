@@ -37,7 +37,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 @import "@/variables.scss";
 
-.catalog-header{
+.catalog-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -47,10 +47,6 @@ export default defineComponent({
         font-weight: 500;
         font-size: 12px;
         text-transform: uppercase;
-    }
-
-    .catalog-header__sort-list {
-
     }
 }
 
