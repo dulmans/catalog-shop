@@ -9,7 +9,11 @@
         <button type="button" class="action-btn__item">
             <heart-icon />
         </button>
-        <button type="button" class="action-btn__item">
+        <button
+            type="button"
+            class="action-btn__item"
+            @click="$emit('openModal')"
+        >
             <header-basket-item />
         </button>
     </div>
@@ -17,10 +21,11 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+
 import SearchIcon from '@/assets/icons/SearchIcon.vue';
 import ProfileIcon from '@/assets/icons/ProfileIcon.vue';
 import HeartIcon from '@/assets/icons/HeartIcon.vue';
-import HeaderBasketItem from './HeaderBasketItem.vue';
+import HeaderBasketItem from '@/components/header/HeaderBasketItem.vue';
 
 export default defineComponent({
     setup() {

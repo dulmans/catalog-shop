@@ -1,5 +1,7 @@
 <template>
-    <div class="product-item">
+    <div
+        :class="[{'not-available': !(prodItem.category.inStock)}, 'product-item']"
+        >
         <div class="product-category">
             <div class="category-item__contain">
                 <category-item
@@ -11,6 +13,12 @@
             </div>
         </div>
         <div class="product-image">
+            <div
+                class="text__not-available"
+                v-if="!(prodItem.category.inStock)"
+            >
+                <span>Нет в наличии</span>
+            </div>
             <div class="main-image image"><img :src="prodItem.mainInfo.image.main" loading="lazy"/></div>
             <div class="hover-image image"><img :src="prodItem.mainInfo.image.hover" loading="lazy"/></div>
         </div>
@@ -19,7 +27,9 @@
             <span class="product-price">{{Math.ceil(Number(prodItem.mainInfo.price))}} ₽</span>
             <my-button
                 class="button-add"
-            ><span class="button-text">+</span></my-button>
+            >
+                <span class="button-text">+</span>
+            </my-button>
         </div>
     </div>
 </template>
@@ -102,9 +112,38 @@ export default defineComponent({
     padding-bottom: 14px;
     border-bottom: 1px solid rgba(0, 0, 0, .1);
 
+    &.not-available {
+        opacity: .3;
+
+        &:hover {
+            .text__not-available {
+                opacity: 1;
+            }
+        }
+    }
+
     .product-image {
         max-width: 100%;
         position: relative;
+
+        .text__not-available {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            text-transform: uppercase;
+            font-weight: 600;
+            font-size: 24px;
+            z-index: 4;
+            opacity: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            span {
+                padding: 5px;
+                background: rgba(255, 255, 255, .6);
+                border-radius: 5px;
+            }
+        }
 
         .image {
             img {

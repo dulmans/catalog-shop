@@ -15,4 +15,4 @@ interface ResponseDataCatalog {
     }
 };
 
-export {CategoryFilter, ResponseDataCatalog}
+export { CategoryFilter, ResponseDataCatalog };

@@ -17,14 +17,16 @@
             <div class="header-content__block right-content">
                 <request-call />
 
-                <action-btns-head />
+                <action-btns-head
+                    @openModal="$emit('update:showBacket', true)"
+                />
             </div>
         </div>
     </header>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, PropType } from 'vue';
 import Logo from '@/assets/Logo.vue';
 
 import NavigationMenu from '@/components/header/NavigationMenu.vue';
@@ -37,6 +39,11 @@ export default defineComponent({
         NavigationMenu,
         RequestCall,
         ActionBtnsHead
+    },
+    props: {
+        showBacket: {
+            type: Boolean as PropType<boolean>
+        }
     },
     setup() {
         return {};

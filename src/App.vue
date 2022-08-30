@@ -1,8 +1,19 @@
 <template>
     <div class="app">
         <div class="app-content">
+            <my-modal
+                v-if="showBasketModal"
+                v-model:showModal="showBasketModal"
+                :modalTitle="'Корзина'"
+            >
+                <basket-elem
+                    v-model:showModal="showBasketModal"
+                    :itemLists="basketLists"
+                />
+            </my-modal>
             <header-elem
-            class="container-one"
+                class="container-one"
+                v-model:showBacket="showBasketModal"
             />
             <div class="slider-banner">
                 <text-pagination
@@ -30,19 +41,23 @@ import SliderBanner from '@/components/SliderBanner.vue';
 import TextPagination from '@/components/slider-banner/TextPagination.vue';
 import FooterElem from '@/components/FooterElem.vue';
 import CatalogColors from '@/views/CatalogColors.vue';
+import BasketElem from '@/components/BasketElem.vue';
 
 import MainBanner from '@/types/MainBanner';
 import PaginationText from '@/types/PaginationText';
+import { BasketLists } from '@/types/Basket';
+
 
 
 export default defineComponent({
     components:{
-        HeaderElem,
-        SliderBanner,
-        TextPagination,
-        FooterElem,
-        CatalogColors
-    },
+    HeaderElem,
+    SliderBanner,
+    TextPagination,
+    FooterElem,
+    CatalogColors,
+    BasketElem
+},
     setup () {
         const mainBannerArray:MainBanner[] = [
             {title: 'Краски', body: 'Идеально подходят для стен и других поверхностей. Найди свой идеальный цвет!', bgImage: 'https://i.postimg.cc/Gt2Gzgmt/image-banner-1.jpg', link: '#'},
@@ -59,9 +74,22 @@ export default defineComponent({
             {title: 'краски', link: '#'}
         ]);
 
+        const showBasketModal = ref<boolean>(true);
+
+        const basketLists = ref<BasketLists>({
+            '93': {
+                info: {
+                    "mainInfo":{"title":"Краска Wallquest, Brownsone MS90102","price":"149.00","image":{"main":"https://i.postimg.cc/7h74js66/mainImg.jpg","hover":"https://i.postimg.cc/c18dKHmS/hoverImg.jpg"}},"category":{"novelty":false,"inStock":true,"contract":false,"exclusive":true,"sales":true},"id":"93"
+                },
+                count: 1
+            }
+        })
+
         return {
             mainBannerArray,
-            mainPaginationText
+            mainPaginationText,
+            showBasketModal,
+            basketLists
         }
     },
     mounted() {
