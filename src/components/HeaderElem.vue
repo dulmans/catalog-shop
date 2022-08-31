@@ -1,7 +1,6 @@
 <template>
     <header class="header">
         <div class="header__contain">
-
             <div class="header-content__block left-content">
                 <div class="logo">
                     <a href="#">
@@ -19,6 +18,7 @@
 
                 <action-btns-head
                     @openModal="$emit('update:showBacket', true)"
+                    :basketCount="basketTotalCount"
                 />
             </div>
         </div>
@@ -43,6 +43,9 @@ export default defineComponent({
     props: {
         showBacket: {
             type: Boolean as PropType<boolean>
+        },
+        basketTotalCount: {
+            type: Number as PropType<number>
         }
     },
     setup() {

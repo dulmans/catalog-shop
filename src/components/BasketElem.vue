@@ -2,10 +2,10 @@
     <div class="basket">
         <div
             class="basket-zero"
-            v-if="false"
+            v-if="totalCount <= 0"
         >
             <span class="basket-zero__text default__text">Ваша корзина пуста &#128549;</span>
-            <span @click="$emit('update:showModal', false)" class="basket-zero__text close-modal__text">
+            <span @click="hideModal" class="basket-zero__text close-modal__text">
                 &gt; Но это легко исправить &#128516; &lt;
             </span>
         </div>
@@ -14,23 +14,37 @@
             v-else
         >
             <div class="basket-header">
-                <span class="basket-count header-text">товара</span>
-                <span class="basket-clear header-text">очистить список</span>
+                <span class="basket-count header-text">{{totalCount}} товара</span>
+                <span
+                    class="basket-clear header-text"
+                    @click="$emit('allClear')"
+                >
+                    очистить список
+                </span>
             </div>
             <div class="basket-lists">
                 <basket-item
                     v-for="item in itemLists"
                     :key="item.info.id"
                     :itemBas="item"
+                    @updateCount="$emit('updateItemCount', $event)"
+                    @deleteItem="$emit('deleteBasketItem', $event)"
+                    @hideModalSwitch="hideModal"
                 />
             </div>
-            <div class="basket-footer"></div>
+            <div class="basket-footer">
+                <div class="basket-total__price">
+                    <span>Итого</span>
+                    <span>{{totalPrice.toLocaleString()}}₽</span>
+                </div>
+                <div class="basket-btn__checkout"></div>
+            </div>
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent, PropType, computed } from 'vue'
 
 import BasketItem from '@/components/basket/BasketItem.vue';
 
@@ -46,8 +60,32 @@ export default defineComponent({
         }
     },
     components: { BasketItem },
-    setup() {
-        return {};
+    emits: ['update:showModal', 'updateItemCount', 'deleteBasketItem', 'allClear'],
+    setup(props, {emit}) {
+        const hideModal = () => {
+            emit('update:showModal', false)
+        };
+
+        const totalPrice = computed(():number => {
+            let totalRes = 0;
+            for(const key in props?.itemLists){
+                if(!(props?.itemLists[key].info.category.inStock)){continue;}
+                else {
+                    totalRes += props?.itemLists[key].count * Number(props?.itemLists[key].info.mainInfo.price);
+                };
+            };
+            return totalRes;
+        });
+
+        const totalCount = computed(():number => {
+            let totalRes = 0;
+            for(const key in props?.itemLists){
+                totalRes += props?.itemLists[key].count;
+            };
+            return totalRes;
+        })
+
+        return { hideModal, totalPrice, totalCount };
     }
 })
 </script>
@@ -82,6 +120,7 @@ export default defineComponent({
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin-bottom: 10px;
 
         .header-text {
             color: $color-default;

@@ -27,6 +27,7 @@
             <span class="product-price">{{Math.ceil(Number(prodItem.mainInfo.price))}} ₽</span>
             <my-button
                 class="button-add"
+                @click="$emit('addNewItem', prodItem)"
             >
                 <span class="button-text">+</span>
             </my-button>

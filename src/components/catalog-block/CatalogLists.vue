@@ -4,6 +4,7 @@
             v-for="prod in prodLists"
             :key="prod.id"
             :prodItem="prod"
+            @addNewItem="$emit('addNewBasketItem', $event)"
         />
     </transition-group>
 </template>

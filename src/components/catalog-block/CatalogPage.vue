@@ -13,7 +13,8 @@
             </div>
             <div class="catalog-lists">
                 <catalog-lists
-                    :prodLists="catalogLists"
+                    :prodLists="catalogLists ?? []"
+                    @addNewBasketItem="$emit('addNewItem', $event)"
                 />
             </div>
         </div>

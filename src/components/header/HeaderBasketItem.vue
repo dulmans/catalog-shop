@@ -1,13 +1,20 @@
 <template>
     <div class="basket-item">
-        <span>0</span>
+        <span v-if="(basketTotalCount ?? 0) <= 0">0</span>
+        <span v-else-if="(basketTotalCount ?? 0) >= 100">99</span>
+        <span v-else>{{basketTotalCount}}</span>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 
 export default defineComponent({
+    props: {
+        basketTotalCount: {
+            type: Number as PropType<number>
+        }
+    },
     setup () {
 
 
@@ -27,7 +34,7 @@ export default defineComponent({
     border-radius: 50%;
     span{
         color: $color-default;
-        font-weight: 500;
+        font-weight: 600;
         font-size: 12px;
     }
 }

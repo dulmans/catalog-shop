@@ -4,6 +4,7 @@
         :catalogLists="itemsCatalogFilterSort"
         @switchChecked="updateFilterOption"
         @updateSelect="updateSelectSort"
+        @addNewItem="$emit('addNewBasketItem', $event)"
     />
 </template>
 

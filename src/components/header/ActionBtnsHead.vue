@@ -13,14 +13,17 @@
             type="button"
             class="action-btn__item"
             @click="$emit('openModal')"
+            :style="{opacity: (basketCount ?? 0) > 0 ? '1' : '.65'}"
         >
-            <header-basket-item />
+            <header-basket-item
+                :basketTotalCount="basketCount"
+            />
         </button>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 
 import SearchIcon from '@/assets/icons/SearchIcon.vue';
 import ProfileIcon from '@/assets/icons/ProfileIcon.vue';
@@ -28,10 +31,15 @@ import HeartIcon from '@/assets/icons/HeartIcon.vue';
 import HeaderBasketItem from '@/components/header/HeaderBasketItem.vue';
 
 export default defineComponent({
+    props: {
+        basketCount: {
+            type: Number as PropType<number>
+        }
+    },
+    components: { SearchIcon, ProfileIcon, HeartIcon, HeaderBasketItem },
     setup() {
         return {};
     },
-    components: { SearchIcon, ProfileIcon, HeartIcon, HeaderBasketItem }
 })
 </script>
 
