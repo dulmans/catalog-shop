@@ -11,11 +11,10 @@
                 />
             </my-modal>
             <header-elem
-                class="container-one"
                 v-model:showBacket="showBasketModal"
                 :basketTotalCount="(Object.keys(basketLists)).length"
             />
-            <div class="slider-banner">
+            <!-- <div class="slider-banner">
                 <text-pagination :pages="mainPaginationText" />
                 <slider-banner :banners="mainBannerArray" />
             </div>
@@ -26,7 +25,7 @@
                     />
                 </div>
             </main>
-            <footer-elem />
+            <footer-elem /> -->
         </div>
     </div>
 </template>
@@ -78,7 +77,7 @@ export default defineComponent({
             { title: 'краски', link: '#' }
         ]);
 
-        const showBasketModal = ref<boolean>(true);
+        const showBasketModal = ref<boolean>(false);
 
         const basketLists = ref<BasketLists>({});
 
@@ -170,6 +169,16 @@ a {
 
 .container-one {
     padding: 0 65px;
+
+    @media (max-width: 900px) {
+        padding: 0 50px;
+    }
+    @media (max-width: 700px) {
+        padding: 0 35px;
+    }
+    @media (max-width: 500px) {
+        padding: 0 25px;
+    }
 }
 
 .dark-focus-bg {

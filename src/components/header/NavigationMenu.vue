@@ -22,8 +22,9 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .menu-items{
-    > *:not(:last-child){
-        margin-right: 24px;
-    }
+    display: flex;
+    gap: 10px 24px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 </style>

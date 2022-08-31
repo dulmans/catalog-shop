@@ -23,6 +23,17 @@ export default defineComponent({
 .request-call{
     display: inline-flex;
     flex-direction: column;
+    margin-right: 110px;
+    white-space: nowrap;
+
+    @media (max-width: 1290px) {
+        margin: 0 50px 0 20px;
+    }
+
+    @media (max-width: 960px) {
+        margin: 0;
+    }
+
     > * {
         color: $color-default;
     }

@@ -11,7 +11,7 @@
         </button>
         <button
             type="button"
-            class="action-btn__item"
+            class="action-btn__item header-basket__elem"
             @click="$emit('openModal')"
             :style="{opacity: (basketCount ?? 0) > 0 ? '1' : '.65'}"
         >
@@ -33,7 +33,8 @@ import HeaderBasketItem from '@/components/header/HeaderBasketItem.vue';
 export default defineComponent({
     props: {
         basketCount: {
-            type: Number as PropType<number>
+            type: Number as PropType<number>,
+            required: false
         }
     },
     components: { SearchIcon, ProfileIcon, HeartIcon, HeaderBasketItem },
@@ -49,10 +50,7 @@ export default defineComponent({
 .action-btns {
     display: flex;
     align-items: center;
-
-    > *:not(:last-child){
-        margin-right: 24px;
-    }
+    gap: 24px;
 
     .action-btn__item {
         background: none;
