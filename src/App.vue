@@ -115,6 +115,7 @@ export default defineComponent({
                     basketLists.value[itemInfo.id] = newItem;
                 }
                 debugUpdateLocal();
+                showBasketModal.value = true;
                 return;
             }
         };
@@ -185,7 +186,5 @@ a {
 
 .main__content {
     background: rgb(255, 255, 255);
-
-    .main__content--container {}
 }
 </style>

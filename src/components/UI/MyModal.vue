@@ -56,9 +56,17 @@ export default defineComponent({
         position: fixed;
         width: 600px;
         right: 0;
-        height: 100vh;
+        height: 100%;
         background: rgb(255, 255, 255);
         padding: 32px 40px;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+
+        .modal-main {
+            height: 100%;
+            flex-grow: 1;
+        }
 
         .modal-header {
             display: flex;

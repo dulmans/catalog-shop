@@ -1,43 +1,40 @@
 <template>
     <div class="basket">
-        <div
-            class="basket-zero"
-            v-if="totalCount <= 0"
-        >
+        <div class="basket-zero" v-if="totalCount <= 0">
             <span class="basket-zero__text default__text">Ваша корзина пуста &#128549;</span>
             <span @click="hideModal" class="basket-zero__text close-modal__text">
                 &gt; Но это легко исправить &#128516; &lt;
             </span>
         </div>
-        <div
-            class="basket-content"
-            v-else
-        >
-            <div class="basket-header">
-                <span class="basket-count header-text">{{totalCount}} товара</span>
-                <span
-                    class="basket-clear header-text"
-                    @click="$emit('allClear')"
-                >
-                    очистить список
-                </span>
-            </div>
-            <div class="basket-lists">
-                <basket-item
-                    v-for="item in itemLists"
-                    :key="item.info.id"
-                    :itemBas="item"
-                    @updateCount="$emit('updateItemCount', $event)"
-                    @deleteItem="$emit('deleteBasketItem', $event)"
-                    @hideModalSwitch="hideModal"
-                />
+        <div class="basket-content" v-else>
+            <div class="basket-main-content__container">
+                <div class="basket-header">
+                    <span class="basket-count header-text">{{ totalCount }} товара</span>
+                    <span class="basket-clear header-text" @click="$emit('allClear')">
+                        очистить список
+                    </span>
+                </div>
+                <div class="basket-lists">
+                    <basket-item
+                        v-for="item in itemLists"
+                        :key="item.info.id"
+                        :itemBas="item"
+                        @updateCount="$emit('updateItemCount', $event)"
+                        @deleteItem="$emit('deleteBasketItem', $event)"
+                        @hideModalSwitch="hideModal"
+                    />
+                </div>
             </div>
             <div class="basket-footer">
                 <div class="basket-total__price">
                     <span>Итого</span>
-                    <span>{{totalPrice.toLocaleString()}}₽</span>
+                    <span class="price-field">{{ totalPrice.toLocaleString() }}₽</span>
                 </div>
-                <div class="basket-btn__checkout"></div>
+                <div class="basket-btn__checkout">
+                    <my-button>
+                        Оформить заказ
+                    </my-button>
+                </div>
             </div>
         </div>
     </div>
@@ -61,15 +58,15 @@ export default defineComponent({
     },
     components: { BasketItem },
     emits: ['update:showModal', 'updateItemCount', 'deleteBasketItem', 'allClear'],
-    setup(props, {emit}) {
+    setup(props, { emit }) {
         const hideModal = () => {
             emit('update:showModal', false)
         };
 
-        const totalPrice = computed(():number => {
+        const totalPrice = computed((): number => {
             let totalRes = 0;
-            for(const key in props?.itemLists){
-                if(!(props?.itemLists[key].info.category.inStock)){continue;}
+            for (const key in props?.itemLists) {
+                if (!(props?.itemLists[key].info.category.inStock)) { continue; }
                 else {
                     totalRes += props?.itemLists[key].count * Number(props?.itemLists[key].info.mainInfo.price);
                 };
@@ -77,9 +74,9 @@ export default defineComponent({
             return totalRes;
         });
 
-        const totalCount = computed(():number => {
+        const totalCount = computed((): number => {
             let totalRes = 0;
-            for(const key in props?.itemLists){
+            for (const key in props?.itemLists) {
                 totalRes += props?.itemLists[key].count;
             };
             return totalRes;
@@ -94,6 +91,14 @@ export default defineComponent({
 @import "@/variables.scss";
 
 .basket {
+    height: 100%;
+
+    .basket-content {
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+        justify-content: space-between;
+    }
 
     .basket-zero {
         display: flex;
@@ -102,6 +107,7 @@ export default defineComponent({
 
         .basket-zero__text {
             font-size: 16px;
+
             &.default__text {
                 color: $color-default;
                 margin-bottom: 10px;
@@ -116,33 +122,63 @@ export default defineComponent({
         }
     }
 
-    .basket-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 10px;
+    .basket-main-content__container {
+        flex-grow: 1;
+        display: inline-flex;
+        flex-direction: column;
 
-        .header-text {
-            color: $color-default;
-            font-size: 14px;
+        .basket-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
 
-            &.basket-count {}
+            .header-text {
+                color: $color-default;
+                font-size: 14px;
 
-            &.basket-clear {
-                cursor: pointer;
-                font-weight: 300;
-                transition: all .09s ease;
-                display: inline-block;
+                &.basket-clear {
+                    cursor: pointer;
+                    font-weight: 300;
+                    transition: all .09s ease;
+                    display: inline-block;
 
-                &:hover {
-                    color: $color-active;
-                }
+                    &:hover {
+                        color: $color-active;
+                    }
 
-                &:active {
-                    transform: scale(.97);
+                    &:active {
+                        transform: scale(.97);
+                    }
                 }
             }
         }
+
+        .basket-lists {
+            flex-grow: 1;
+            max-height: 100%;
+            overflow-y: auto;
+        }
+    }
+
+    .basket-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .basket-total__price {
+            font-size: 16px;
+            color: $color-default;
+            display: inline-flex;
+            flex-direction: column;
+
+            .price-field {
+                font-size: 30px;
+                font-weight: 500;
+                margin-top: 5px;
+            }
+        }
+
+        .basket-btn__checkout {}
     }
 }
 </style>
