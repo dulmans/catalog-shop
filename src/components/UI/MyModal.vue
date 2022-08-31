@@ -1,6 +1,6 @@
 <template>
-    <div class="my-modal">
-        <div class="modal-content">
+    <div class="my-modal" @click.prevent="$emit('update:showModal', false)">
+        <div class="modal-content" @click.stop>
             <div class="modal-header">
                 <h2 class="modal-title">{{ modalTitle }}</h2>
                 <div class="modal-close__btn">
@@ -78,13 +78,13 @@ export default defineComponent({
                     border: 1px solid rgba(0, 0, 0, .1);
                     border-radius: 50%;
                     background: none;
-                    padding: 11px;
+                    padding: 16px;
                     font-size: 0;
                     transition: all .12s ease;
 
                     .close-icon {
-                        width: 24px;
-                        height: 24px;
+                        width: 15px;
+                        height: auto;
 
                         .icon {
                             stroke: $color-default;
