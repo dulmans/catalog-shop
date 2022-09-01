@@ -63,6 +63,11 @@ export default defineComponent({
         flex-direction: column;
         overflow-y: auto;
 
+        @media (max-width: 960px) {
+            width: 100%;
+            padding: 3% 4%;
+        }
+
         .modal-main {
             height: 100%;
             flex-grow: 1;

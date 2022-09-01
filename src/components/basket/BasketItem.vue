@@ -96,6 +96,10 @@ export default defineComponent({
         .basket-image {
             height: 100%;
 
+            @media (max-width: 400px) {
+                height: 90%;
+            }
+
             img {
                 height: 100%;
                 width: auto;
@@ -107,12 +111,21 @@ export default defineComponent({
             color: $color-default;
             font-size: 16px;
 
+            @media (max-width: 500px) {
+                font-size: 15px;
+            }
+
             .basket-title {
                 font-weight: 300;
                 margin: 0;
                 height: 2.5em;
                 overflow: hidden;
                 text-overflow: ellipsis;
+
+                @media (max-width: 960px) {
+                    height: unset;
+                    margin-bottom: 10px
+                }
             }
 
             .basket-price {
@@ -124,6 +137,11 @@ export default defineComponent({
             display: inline-flex;
             align-items: center;
             margin: 0 7% 0 11%;
+
+            @media (max-width: 600px) {
+                flex-direction: column;
+                gap: 5px;
+            }
 
             .basket-count__text {
                 font-size: 16px;

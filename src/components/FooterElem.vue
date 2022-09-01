@@ -18,7 +18,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .footer {
-    height: 300px;
+    height: 30vh;
     width: 100%;
     display: flex;
     justify-content: center;

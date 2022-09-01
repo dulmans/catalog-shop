@@ -32,6 +32,10 @@ export default defineComponent({
     font-size: 12px;
     font-weight: 500;
 
+    @media (max-width: 400px) {
+        padding: 16px 20px;
+    }
+
     &:hover {
         opacity: .9;
     }

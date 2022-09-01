@@ -104,6 +104,7 @@ export default defineComponent({
         display: flex;
         flex-direction: column;
         align-items: center;
+        white-space: nowrap;
 
         .basket-zero__text {
             font-size: 16px;

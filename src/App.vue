@@ -1,15 +1,19 @@
 <template>
     <div class="app">
         <div class="app-content">
-            <my-modal v-if="showBasketModal" v-model:showModal="showBasketModal" :modalTitle="'Корзина'">
-                <basket-elem
-                    v-model:showModal="showBasketModal"
-                    :itemLists="basketLists"
-                    @updateItemCount="basketAction.updateCount"
-                    @deleteBasketItem="basketAction.deleteItem"
-                    @allClear="basketAction.allClearItem"
-                />
-            </my-modal>
+            <div name="basket">
+                <transition name="basket">
+                    <my-modal v-if="showBasketModal" v-model:showModal="showBasketModal" :modalTitle="'Корзина'">
+                        <basket-elem
+                            v-model:showModal="showBasketModal"
+                            :itemLists="basketLists"
+                            @updateItemCount="basketAction.updateCount"
+                            @deleteBasketItem="basketAction.deleteItem"
+                            @allClear="basketAction.allClearItem"
+                        />
+                    </my-modal>
+                </transition>
+            </div>
             <header-elem
                 v-model:showBacket="showBasketModal"
                 :basketTotalCount="(Object.keys(basketLists)).length"
@@ -24,8 +28,8 @@
                         @addNewBasketItem="basketAction.addItem"
                     />
                 </div>
-            </main>
-            <footer-elem /> -->
+            </main> -->
+            <footer-elem />
         </div>
     </div>
 </template>
@@ -195,5 +199,15 @@ a {
 
 .main__content {
     background: rgb(255, 255, 255);
+}
+
+.basket-enter-active,
+.basket-leave-active {
+    transition: all 0.3s ease;
+}
+
+.basket-enter-from,
+.basket-leave-to {
+    transform: translateX(100%);
 }
 </style>
