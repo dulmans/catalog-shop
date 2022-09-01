@@ -92,6 +92,13 @@ export default defineComponent({
 .header {
     background: rgb(255, 255, 255);
 
+    @media (max-width: 960px) {
+        position: fixed;
+        z-index: 9;
+        width: 100%;
+        top: 0;
+    }
+
     .header__mobile-menu {
         position: absolute;
         width: 100%;

@@ -18,7 +18,7 @@
                 v-model:showBacket="showBasketModal"
                 :basketTotalCount="(Object.keys(basketLists)).length"
             />
-            <!-- <div class="slider-banner">
+            <div class="slider-banner">
                 <text-pagination :pages="mainPaginationText" />
                 <slider-banner :banners="mainBannerArray" />
             </div>
@@ -28,7 +28,7 @@
                         @addNewBasketItem="basketAction.addItem"
                     />
                 </div>
-            </main> -->
+            </main>
             <footer-elem />
         </div>
     </div>
