@@ -7,27 +7,23 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-export default defineComponent({
-    setup() {
-        return {};
-    },
-})
+export default defineComponent({})
 </script>
 
 <style lang="scss" scoped>
 @import "@/variables.scss";
 
-.menu-item{
+.menu-item {
     text-decoration: none;
     color: $color-default;
     text-transform: uppercase;
     letter-spacing: 0.06em;
     transition: all .1s ease;
     display: inline-block;
-    &:hover{
+
+    &:hover {
         opacity: .95;
         color: $color-active;
     }
 }
-
 </style>

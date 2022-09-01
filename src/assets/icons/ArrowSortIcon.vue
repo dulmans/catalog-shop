@@ -3,15 +3,3 @@
         <path d="M4 4.5L7.4641 0L0.535898 0L4 4.5Z" class="icon" />
     </svg>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-    setup() {
-
-
-        return {}
-    }
-})
-</script>

@@ -9,4 +9,4 @@ type CategoryOption = {
     [key in CategoryFilter]: FillObjectOption;
 };
 
-export { CategoryOption, FillObjectOption};
+export { CategoryOption, FillObjectOption };

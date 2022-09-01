@@ -2,7 +2,7 @@
     <div class="my-modal" @click.prevent="$emit('update:showModal', false)">
         <div class="modal-content" @click.stop>
             <div class="modal-header">
-                <h2 class="modal-title">{{ modalTitle }}</h2>
+                <h2 class="modal-title" v-if="modalTitle">{{ modalTitle }}</h2>
                 <div class="modal-close__btn">
                     <button
                         type="button"
@@ -22,23 +22,26 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import CloseIcon from '../../assets/icons/CloseIcon.vue'
+
+import CloseIcon from '@/assets/icons/CloseIcon.vue';
 
 export default defineComponent({
     name: "my-modal",
     props: {
+        /* Отвечает за отображение модального окна */
         showModal: {
             type: Boolean as PropType<boolean>,
             requared: true
         },
+        /* Содержит title модального окна */
         modalTitle: {
-            type: String as PropType<string>
+            type: String as PropType<string>,
+            required: false
         }
     },
-    setup() {
-        return {};
-    },
-    components: { CloseIcon }
+    components: {
+        CloseIcon
+    }
 })
 </script>
 

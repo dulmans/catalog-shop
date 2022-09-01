@@ -1,12 +1,23 @@
 <template>
     <div class="catalog-page">
         <transition name="filter">
-            <aside class="aside__filter-bar container-one mobile-filter" v-if="showFilterBlock" @click="showFilterBlock = false">
-                <filter-items :itemLists="presetData?.filter" @updateCheckbox="$emit('switchChecked', $event)" @click.stop="" />
+            <aside
+                class="aside__filter-bar container-one mobile-filter"
+                v-if="showFilterBlock"
+                @click="showFilterBlock = false"
+            >
+                <filter-items
+                    :itemLists="presetData?.filter"
+                    @updateCheckbox="$emit('switchChecked', $event)"
+                    @click.stop=""
+                />
             </aside>
         </transition>
         <aside class="aside__filter-bar container-one">
-            <filter-items :itemLists="presetData?.filter" @updateCheckbox="$emit('switchChecked', $event)" />
+            <filter-items
+                :itemLists="presetData?.filter"
+                @updateCheckbox="$emit('switchChecked', $event)"
+            />
         </aside>
 
         <div class="content-group container-one">
@@ -46,18 +57,23 @@ export default defineComponent({
         CatalogLists
     },
     props: {
+        /* Объект с информацией об элементах фильтрации и сортировки */
         presetData: {
             type: Object as PropType<PresetCatalogOption>,
             requared: true
         },
+        /* Массив с элементами каталога */
         catalogLists: {
             type: Array as PropType<ResponseDataCatalog[]>
         }
     },
     setup() {
+        /* Отвечает за скрытие/ отображение блока фильтрации каталога (для мобильных девайсов) */
         const showFilterBlock = ref<boolean>(false);
 
-        return { showFilterBlock };
+        return {
+            showFilterBlock
+        };
     },
 })
 </script>

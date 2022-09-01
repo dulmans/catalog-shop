@@ -13,11 +13,9 @@
             type="button"
             class="action-btn__item header-basket__elem"
             @click="$emit('openModal')"
-            :style="{opacity: (basketCount ?? 0) > 0 ? '1' : '.65'}"
+            :style="{ opacity: (basketCount ?? 0) > 0 ? '1' : '.65' }"
         >
-            <header-basket-item
-                :basketTotalCount="basketCount"
-            />
+            <header-basket-item :basketTotalCount="basketCount" />
         </button>
     </div>
 </template>
@@ -32,15 +30,18 @@ import HeaderBasketItem from '@/components/header/HeaderBasketItem.vue';
 
 export default defineComponent({
     props: {
+        /* Кол-во товаров в корзине*/
         basketCount: {
             type: Number as PropType<number>,
             required: false
         }
     },
-    components: { SearchIcon, ProfileIcon, HeartIcon, HeaderBasketItem },
-    setup() {
-        return {};
-    },
+    components: {
+        SearchIcon,
+        ProfileIcon,
+        HeartIcon,
+        HeaderBasketItem
+    }
 })
 </script>
 
@@ -59,6 +60,7 @@ export default defineComponent({
         cursor: pointer;
         height: 22px;
         width: 22px;
+
         * {
             transition: all .1s ease;
         }
@@ -66,13 +68,13 @@ export default defineComponent({
         &:hover {
             opacity: .9;
 
-            svg .header-action__icon{
+            svg .header-action__icon {
                 stroke: $color-active;
             }
         }
 
 
-        > * {
+        >* {
             width: 100%;
             height: 100%;
         }

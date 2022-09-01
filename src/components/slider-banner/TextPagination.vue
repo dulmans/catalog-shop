@@ -6,7 +6,7 @@
             :key="index"
             class="pagination-text__item"
         >
-            {{page.title}}
+            {{ page.title }}
         </a>
     </div>
 </template>
@@ -17,16 +17,12 @@ import { defineComponent, PropType } from 'vue'
 import PaginationText from '@/types/PaginationText';
 
 export default defineComponent({
-    props:{
+    props: {
+        /* Содержит массив с элементами пагинации */
         pages: {
             type: Array as PropType<PaginationText[]>,
             requared: true
         }
-    },
-    setup () {
-
-
-        return {}
     }
 })
 </script>
@@ -43,7 +39,7 @@ $color-elems: #fff;
     z-index: 2;
     margin-top: 35px;
 
-    > *:not(:last-child) {
+    >*:not(:last-child) {
         position: relative;
         display: inline-flex;
         align-items: center;
@@ -68,7 +64,7 @@ $color-elems: #fff;
         font-size: 10px;
         letter-spacing: 1px;
 
-        &:hover{
+        &:hover {
             color: rgba($color-elems, 1);
         }
     }
@@ -80,15 +76,16 @@ $color-elems: #fff;
         z-index: unset;
         margin: 16px 0 48px;
 
-        & > *:not(:last-child) {
+        &>*:not(:last-child) {
             &::after {
                 background-color: rgba($color-elems, .3);
             }
         }
+
         .pagination-text__item {
             color: rgba($color-elems, .3);
 
-            &:hover{
+            &:hover {
                 color: rgba($color-elems, 1);
             }
         }

@@ -5,17 +5,20 @@
                 type="checkbox"
                 v-model="showOptions"
             />
-            <span class="text-option__value">{{currentIndexValue}}</span>
-            <arrow-sort-icon class="current-icon"/>
+            <span class="text-option__value">{{ currentIndexValue }}</span>
+            <arrow-sort-icon class="current-icon" />
         </label>
         <transition name="optionsList">
-            <div class="options-container" v-show="showOptions">
+            <div
+                class="options-container"
+                v-show="showOptions"
+            >
                 <label
                     v-for="(optionItem, index) in sortOptions?.lists"
                     :key="index"
                     @change="$emit('updateSelect', selected)"
                     @click="showOptions = false"
-                    :class="[{'active-option': selected === optionItem.value}, 'option-item__area', 'item-area']"
+                    :class="[{ 'active-option': selected === optionItem.value }, 'option-item__area', 'item-area']"
                 >
                     <input
                         type="radio"
@@ -24,7 +27,7 @@
                         v-model="selected"
                         :checked="selected === optionItem.value"
                     >
-                    <span class="text-option__value">{{optionItem.title}}</span>
+                    <span class="text-option__value">{{ optionItem.title }}</span>
                 </label>
             </div>
         </transition>
@@ -32,11 +35,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref, computed } from 'vue'
+import { defineComponent, PropType, ref, computed, watch } from 'vue'
 
 import ArrowSortIcon from '@/assets/icons/ArrowSortIcon.vue';
 
-import { PresetCatalogOptionSort, ValueSortLists } from '@/types/PresetCatalogOption';
+import { PresetCatalogOptionSort } from '@/types/PresetCatalogOption';
 
 export default defineComponent({
     name: 'my-options-list',
@@ -44,38 +47,44 @@ export default defineComponent({
         ArrowSortIcon
     },
     props: {
+        /* Содержит элементы списка */
         sortOptions: {
             type: Object as PropType<PresetCatalogOptionSort>,
             requared: true
         },
+        /* Отвечает за скрытие/ отображение выпадающего списка */
         focusControl: {
             type: Boolean as PropType<Boolean>
         }
     },
-    emits: ['update:focusControl', 'updateSelect'],
-    setup (props, { emit }) {
+    emits: ['updateSelect', 'update:focusControl'],
+    setup(props, { emit }) {
+        /* Содержит текущее значение select */
         const selected = ref(props?.sortOptions?.currentValue);
+
+        /* Отвечает за скрытие/ отображение выпадающего списка */
         const showOptions = ref<boolean>(false);
 
-        const currentIndexValue = computed(():string => {
-            for (const value of (props?.sortOptions?.lists ?? [])){
-                if(value.value === selected.value){
-                    return value.title;
+        /* Возвращает за текущее строчное значение selected  */
+        const currentIndexValue = computed((): string => {
+            for (const itemSort of (props?.sortOptions?.lists ?? [])) {
+                if (itemSort.value === selected.value) {
+                    return itemSort.title;
                 };
             };
             return 'Отсортировать'; // в случае непредвиденной ошибки
+        });
+
+        /* Наблюдатель за функцией отображения/ скрытия списка элементов */
+        watch(showOptions, () => {
+            emit('update:focusControl', showOptions.value);
         });
 
         return {
             selected,
             currentIndexValue,
             showOptions,
-        }
-    },
-    watch: {
-        showOptions () {
-            this.$emit('update:focusControl', this.showOptions);
-        }
+        };
     }
 })
 </script>
@@ -184,5 +193,4 @@ input {
         }
     }
 }
-
 </style>

@@ -8,32 +8,37 @@
         <div class="floating-button">
             <div class="eclipse"></div>
         </div>
-        <span class="checkbox-title">{{checkboxItem?.title}}</span>
+        <span class="checkbox-title" v-if="checkboxItem">{{ checkboxItem.title }}</span>
     </label>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, PropType } from 'vue'
 
-import {PresetCatalogOptionFilter} from '@/types/PresetCatalogOption';
+import { PresetCatalogOptionFilter } from '@/types/PresetCatalogOption';
 
 export default defineComponent({
     name: 'my-checkbox-button',
     props: {
+        /* Объект с информацией об текущем элементе */
         checkboxItem: {
             type: Object as PropType<PresetCatalogOptionFilter>
         }
     },
-    setup (props) {
-        const checked = ref(props.checkboxItem?.value)
+    setup(props) {
+        /* Отвечает за состояние checked у input */
+        const checked = ref<boolean>(props.checkboxItem?.value ?? false);
 
-        return {checked}
+        return {
+            checked
+        };
     }
 })
 </script>
 
 <style lang="scss" scoped>
 @import "@/variables.scss";
+
 .checkbox-label {
     cursor: pointer;
     display: inline-flex;
@@ -49,8 +54,9 @@ export default defineComponent({
         height: 0;
         width: 0;
         visibility: hidden;
+
         &:checked {
-            ~ .floating-button {
+            ~.floating-button {
                 background: $color-active;
 
                 .eclipse {

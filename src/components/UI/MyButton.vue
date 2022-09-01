@@ -8,12 +8,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-    name: 'my-button',
-    setup () {
-
-
-        return {}
-    }
+    name: 'my-button'
 })
 </script>
 

@@ -1,13 +1,21 @@
 <template>
     <div class="catalog-header">
-        <div v-if="darkFocus" class="dark-focus-bg"></div>
-        <span class="catalog-header__count-items filter-text" @click="$emit('update:showFilter', true)">Фильтры</span>
-        <span class="catalog-header__count-items">{{itemLength ?? 0}} товаров</span>
+        <div
+            v-if="darkFocus"
+            class="dark-focus-bg"
+        ></div>
+        <span
+            class="catalog-header__count-items filter-text"
+            @click="$emit('update:showFilter', true)"
+        >
+            Фильтры
+        </span>
+        <span class="catalog-header__count-items">{{ itemLength ?? 0 }} товаров</span>
         <div class="catalog-header__sort-list">
             <my-options-list
                 :sortOptions="sortByInfo"
-                @updateSelect="$emit('updateSelect', $event)"
                 v-model:focusControl="darkFocus"
+                @updateSelect="$emit('updateSelect', $event)"
             />
         </div>
     </div>
@@ -20,20 +28,26 @@ import { PresetCatalogOptionSort } from '@/types/PresetCatalogOption';
 
 export default defineComponent({
     props: {
+        /* Колв-во товаров в корзине */
         itemLength: {
             type: Number as PropType<number>
         },
+        /* Объект с информацией о текущей сортировки каталога */
         sortByInfo: {
             type: Object as PropType<PresetCatalogOptionSort>
         },
+        /* Отвечает за скрытие/ отображение выпадающего списка фильтрации */
         showFilter: {
             type: Boolean as PropType<Boolean>
         }
     },
-    setup () {
+    setup() {
+        /* Отвечает за скрытие/ отображение тёмного фона на заднем плане */
         const darkFocus = ref<boolean>(false);
 
-        return { darkFocus }
+        return {
+            darkFocus
+        }
     }
 })
 </script>
@@ -70,5 +84,4 @@ export default defineComponent({
         }
     }
 }
-
 </style>

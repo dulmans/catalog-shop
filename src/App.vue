@@ -2,8 +2,13 @@
     <div class="app">
         <div class="app-content">
             <div name="basket">
+
                 <transition name="basket">
-                    <my-modal v-if="showBasketModal" v-model:showModal="showBasketModal" :modalTitle="'Корзина'">
+                    <my-modal
+                        v-if="showBasketModal"
+                        v-model:showModal="showBasketModal"
+                        :modalTitle="'Корзина'"
+                    >
                         <basket-elem
                             v-model:showModal="showBasketModal"
                             :itemLists="basketLists"
@@ -14,22 +19,25 @@
                     </my-modal>
                 </transition>
             </div>
+
             <header-elem
                 v-model:showBacket="showBasketModal"
                 :basketTotalCount="(Object.keys(basketLists)).length"
             />
+
             <div class="slider-banner">
                 <text-pagination :pages="mainPaginationText" />
                 <slider-banner :banners="mainBannerArray" />
             </div>
+
             <main class="main__content">
                 <div class="main__content--container">
-                    <catalog-colors
-                        @addNewBasketItem="basketAction.addItem"
-                    />
+                    <catalog-colors @addNewBasketItem="basketAction.addItem" />
                 </div>
             </main>
+
             <footer-elem />
+
         </div>
     </div>
 </template>
@@ -61,11 +69,7 @@ export default defineComponent({
         BasketElem
     },
     setup() {
-        const debugUpdateLocal = ():void => {
-            basketLists.value = {...basketLists.value};
-            return;
-        };
-
+        /* Элементы слайдер-баннера */
         const mainBannerArray: MainBanner[] = [
             { title: 'Краски', body: 'Идеально подходят для стен и других поверхностей. Найди свой идеальный цвет!', bgImage: 'https://i.postimg.cc/Gt2Gzgmt/image-banner-1.jpg', link: '#' },
             { title: 'Краски 2', body: 'Идеально подходят для стен и других поверхностей. Найди свой идеальный цвет!', bgImage: 'https://i.postimg.cc/Gt2Gzgmt/image-banner-1.jpg', link: '#' },
@@ -75,54 +79,74 @@ export default defineComponent({
             { title: 'Краски 6', body: 'Идеально подходят для стен и других поверхностей. Найди свой идеальный цвет!', bgImage: 'https://i.postimg.cc/Gt2Gzgmt/image-banner-1.jpg', link: '#' }
         ];
 
+        /* Элементы пагинации */
         const mainPaginationText = ref<PaginationText[]>([
             { title: 'главная', link: '#' },
             { title: 'продукты', link: '#' },
             { title: 'краски', link: '#' }
         ]);
 
+        /* Скрывает/отображает корзину */
         const showBasketModal = ref<boolean>(false);
 
+        /* Содержит элементы корзины */
         const basketLists = ref<BasketLists>({});
 
+
+
+        /* Дебаг-функция, которая обновляет значение элементов корзины для синхронизации с localStorage */
+        const debugUpdateLocal = (): void => {
+            basketLists.value = { ...basketLists.value };
+            return;
+        };
+
+        /* Объект с функциями, отвечающие за любые действия с корзиной */
         const basketAction = {
-            deleteItem(elemID: string):void {
+            /* Удаление элементов корзины */
+            /* elemID - ID элемента, который нужно удалить */
+            deleteItem(elemID: string): void {
                 delete basketLists.value[elemID];
                 debugUpdateLocal();
                 return;
             },
-            allClearItem():void {
+            /* Удаление ВСЕХ элементов корзины */
+            allClearItem(): void {
                 basketLists.value = {};
                 debugUpdateLocal();
                 return;
             },
-            updateCount(updateInfo: UpdateCount):void {
+            /* Обновление кол-ва каждого товара в корзине */
+            /* updateInfo - объект с необходимой информацией о товаре и новом значении кол-ва */
+            updateCount(updateInfo: UpdateCount): void {
                 if (updateInfo.newCount <= 0) {
                     basketAction.deleteItem(updateInfo.id);
                 }
                 else {
                     basketLists.value[updateInfo.id].count = updateInfo.newCount;
-                }
+                };
                 debugUpdateLocal();
                 return;
             },
-            addItem(itemInfo:ResponseDataCatalog):void {
-                if(itemInfo.id in basketLists.value){
+            /* Добавление нового элемента в корзину */
+            /* itemInfo - информация об элементе */
+            addItem(itemInfo: ResponseDataCatalog): void {
+                if (itemInfo.id in basketLists.value) {
                     basketLists.value[itemInfo.id].count += 1;
                 }
                 else {
-                    const newItem:BasketItem = {
+                    const newItem: BasketItem = {
                         count: 1,
                         info: itemInfo
                     };
                     basketLists.value[itemInfo.id] = newItem;
-                }
+                };
                 debugUpdateLocal();
                 showBasketModal.value = true;
                 return;
             }
         };
 
+        /* Наблюдатель за элементами корзины для сохранения актуального значения в localStorage */
         watch(basketLists, () => {
             localStorage.setItem('basketItems', JSON.stringify(basketLists.value));
         });
@@ -136,8 +160,9 @@ export default defineComponent({
         };
     },
     mounted() {
-        if(localStorage.getItem('basketItems')){
-            const getLocalBasketLists:BasketLists = JSON.parse(localStorage.getItem('basketItems') ?? '');
+        /* Достаём элементы корзины из localStorage (если они имеются) */
+        if (localStorage.getItem('basketItems')) {
+            const getLocalBasketLists: BasketLists = JSON.parse(localStorage.getItem('basketItems') ?? '');
             this.basketLists = getLocalBasketLists;
         };
     }
@@ -188,9 +213,11 @@ export default defineComponent({
         @media (max-width: 900px) {
             padding: 0 50px;
         }
+
         @media (max-width: 700px) {
             padding: 0 35px;
         }
+
         @media (max-width: 500px) {
             padding: 0 25px;
         }

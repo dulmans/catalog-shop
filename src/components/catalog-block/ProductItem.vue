@@ -1,14 +1,13 @@
 <template>
-    <div
-        :class="[{'not-available': !(prodItem.category.inStock)}, 'product-item']"
-        >
+    <div :class="[{ 'not-available': !(prodItem.category.inStock) }, 'product-item']">
         <div class="product-category">
             <div class="category-item__contain">
                 <category-item
-                    v-for="category in categoryProduct"
-                    :style="{background: `${category.bgColor}`}"
+                    v-for="(category, index) in categoryProduct"
+                    :key="index"
+                    :style="{ background: `${category.bgColor}` }"
                 >
-                    {{category.title}}
+                    {{ category.title }}
                 </category-item>
             </div>
         </div>
@@ -19,12 +18,12 @@
             >
                 <span>Нет в наличии</span>
             </div>
-            <div class="main-image image"><img :src="prodItem.mainInfo.image.main" loading="lazy"/></div>
-            <div class="hover-image image"><img :src="prodItem.mainInfo.image.hover" loading="lazy"/></div>
+            <div class="main-image image"><img :src="prodItem.mainInfo.image.main" loading="lazy" /></div>
+            <div class="hover-image image"><img :src="prodItem.mainInfo.image.hover" loading="lazy" /></div>
         </div>
-        <h3 class="product-title">{{prodItem.mainInfo.title}}</h3>
+        <h3 class="product-title">{{ prodItem.mainInfo.title }}</h3>
         <div class="product-footer">
-            <span class="product-price">{{Math.ceil(Number(prodItem.mainInfo.price))}} ₽</span>
+            <span class="product-price">{{ Math.ceil(Number(prodItem.mainInfo.price)) }} ₽</span>
             <my-button
                 class="button-add"
                 @click="$emit('addNewItem', prodItem)"
@@ -46,14 +45,18 @@ import { CategoryOption, FillObjectOption } from '@/types/CategoryOption';
 
 export default defineComponent({
     props: {
+        /* Объект с информацией о товаре */
         prodItem: {
             type: Object as PropType<ResponseDataCatalog>,
             required: true
         }
     },
-    components: { CategoryItem },
+    components: {
+        CategoryItem
+    },
     setup() {
-        const categoryOption:CategoryOption = {
+        /* Настройки отображения категорий в карточке товара */
+        const categoryOption: CategoryOption = {
             novelty: {
                 title: 'Новинка',
                 bgColor: 'rgba(0, 179, 88, .5)',
@@ -76,16 +79,21 @@ export default defineComponent({
             }
         };
 
-        const categoryProduct = ref<FillObjectOption[]>([])
+        /* Массив со списком категорий товара */
+        const categoryProduct = ref<FillObjectOption[]>([]);
 
-        return {categoryOption, categoryProduct};
+        return {
+            categoryOption,
+            categoryProduct
+        };
     },
-    mounted () {
-        for(let key in this.prodItem.category){
-            if(this.prodItem.category[key as CategoryFilter]){
-                this.categoryProduct.push(this.categoryOption[key as CategoryFilter])
-            }
-        }
+    mounted() {
+        /* Определяем массив категорий товара */
+        for (const key in this.prodItem.category) {
+            if (this.prodItem.category[key as CategoryFilter]) {
+                this.categoryProduct.push(this.categoryOption[key as CategoryFilter]);
+            };
+        };
     }
 })
 </script>
@@ -139,6 +147,7 @@ export default defineComponent({
             display: flex;
             justify-content: center;
             align-items: center;
+
             span {
                 padding: 5px;
                 background: rgba(255, 255, 255, .6);
@@ -151,9 +160,6 @@ export default defineComponent({
                 width: 100%;
                 height: auto;
                 object-fit: cover;
-            }
-            &.main-image {
-
             }
 
             &.hover-image {
@@ -182,6 +188,7 @@ export default defineComponent({
         display: flex;
         justify-content: space-between;
         align-items: center;
+
         .product-price {
             font-weight: 600;
             font-size: inherit;

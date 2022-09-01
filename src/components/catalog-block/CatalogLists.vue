@@ -1,5 +1,9 @@
 <template>
-    <transition-group name="flip-list" tag="div" class="catalog__items-contain">
+    <transition-group
+        name="flip-list"
+        tag="div"
+        class="catalog__items-contain"
+    >
         <product-item
             v-for="prod in prodLists"
             :key="prod.id"
@@ -21,21 +25,15 @@ export default defineComponent({
         ProductItem
     },
     props: {
+        /* Массив с элементами товаров каталога */
         prodLists: {
-            type: Array as PropType<ResponseDataCatalog[]>,
-            required: true
+            type: Array as PropType<ResponseDataCatalog[]>
         }
-    },
-    setup () {
-
-
-        return {}
     }
 })
 </script>
 
 <style lang="scss" scoped>
-
 .flip-list-move {
     transition: transform 0.5s ease-in-out;
 }
@@ -50,9 +48,11 @@ export default defineComponent({
     @media (max-width: 1550px) {
         grid-template-columns: repeat(3, 1fr);
     }
+
     @media (max-width: 960px) {
         grid-template-columns: repeat(3, 1fr);
     }
+
     @media (max-width: 800px) {
         grid-template-columns: repeat(2, 1fr);
     }

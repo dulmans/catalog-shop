@@ -4,10 +4,10 @@
         class="main-banner__item"
     >
         <div class="banner-content">
-            <h2 class="banner-text banner-title">{{bannerInfo.title}}</h2>
-            <p class="banner-text banner-body">{{bannerInfo.body}}</p>
+            <h2 class="banner-text banner-title">{{ bannerInfo.title }}</h2>
+            <p class="banner-text banner-body">{{ bannerInfo.body }}</p>
         </div>
-        <img :src="`${bannerInfo.bgImage}`" class="banner-background">
+        <img :src="bannerInfo.bgImage" class="banner-background">
     </a>
 </template>
 
@@ -18,21 +18,17 @@ import MainBanner from '@/types/MainBanner';
 
 export default defineComponent({
     props: {
+        /* Объект с информацией об элементе баннера */
         bannerInfo: {
             type: Object as PropType<MainBanner>,
             required: true
         }
-    },
-    setup () {
-
-
-        return {}
     }
 })
 </script>
 
 <style lang="scss" scoped>
-.main-banner__item{
+.main-banner__item {
     position: relative;
     display: block;
     height: 100%;
@@ -40,14 +36,14 @@ export default defineComponent({
     justify-content: center;
     align-items: center;
 
-    .banner-content{
+    .banner-content {
         max-width: 25%;
 
         @media (max-width: 1000px) {
             max-width: 70%;
         }
 
-        .banner-text{
+        .banner-text {
             color: rgb(255, 255, 255);
             text-align: center;
             transition: all .15s ease;
@@ -65,7 +61,7 @@ export default defineComponent({
         }
     }
 
-    .banner-background{
+    .banner-background {
         position: absolute;
         object-fit: cover;
         object-position: center center;
@@ -75,16 +71,16 @@ export default defineComponent({
         transition: all .5s ease-in-out;
     }
 
-    &:hover{
-        .banner-background{
+    &:hover {
+        .banner-background {
             transform: scale(1.05);
         }
 
-        .banner-title{
+        .banner-title {
             opacity: .9;
         }
 
-        .banner-body{
+        .banner-body {
             opacity: .8;
         }
     }

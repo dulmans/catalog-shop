@@ -1,8 +1,6 @@
 <template>
     <div class="basket-item__contain">
-        <div
-            :class="[{'basket-inActive': !(itemBas?.info.category.inStock)}, 'basket-item']"
-        >
+        <div :class="[{ 'basket-inActive': !(itemBas?.info.category.inStock) }, 'basket-item']">
             <div class="basket-image">
                 <img :src="itemBas?.info.mainInfo.image.main">
             </div>
@@ -13,22 +11,16 @@
             <div class="basket-count__contain">
                 <my-button
                     class="basket-btn"
-                    @click="$emit('updateCount', {id: itemBas?.info.id, newCount: (itemBas?.count ?? 0) - 1})"
+                    @click="$emit('updateCount', { id: itemBas?.info.id, newCount: (itemBas?.count ?? 0) - 1 })"
                 >
-                    <minus-icon
-                        width="12px"
-                        height="2px"
-                    />
+                    <minus-icon width="12px" height="2px" />
                 </my-button>
-                <span class="basket-count__text">{{itemBas?.count}}</span>
+                <span class="basket-count__text">{{ itemBas?.count }}</span>
                 <my-button
                     class="basket-btn"
-                    @click="$emit('updateCount', {id: itemBas?.info.id, newCount: (itemBas?.count ?? 0) + 1})"
+                    @click="$emit('updateCount', { id: itemBas?.info.id, newCount: (itemBas?.count ?? 0) + 1 })"
                 >
-                    <plus-icon
-                        width="12px"
-                        height="12px"
-                    />
+                    <plus-icon width="12px" height="12px" />
                 </my-button>
             </div>
             <button
@@ -63,19 +55,29 @@ import { BasketItem } from '@/types/Basket';
 
 export default defineComponent({
     props: {
+        /* Объект с информацией об элементе корзины */
         itemBas: {
             type: Object as PropType<BasketItem>,
             requared: true
         }
     },
-    components: { MinusIcon, PlusIcon, CloseIcon, SwitchIcon },
+    components: {
+        MinusIcon,
+        PlusIcon,
+        CloseIcon,
+        SwitchIcon
+    },
     emits: ['deleteItem', 'updateCount', 'hideModalSwitch'],
-    setup(props, {emit}) {
-        const switchItem = () => {
+    setup(props, { emit }) {
+        /* Функция, которая вызывает events для удаления элемента и скрытии корзины */
+        const switchItem = ():void => {
             emit('deleteItem', props?.itemBas?.info.id);
             emit('hideModalSwitch');
-        }
-        return { switchItem };
+            return;
+        };
+        return {
+            switchItem
+        };
     }
 })
 </script>
@@ -211,16 +213,18 @@ export default defineComponent({
         }
 
         &.basket-inActive {
-            > *:not(.basket-delete__btn) {
+            >*:not(.basket-delete__btn) {
                 opacity: .2;
                 pointer-events: none;
             }
+
             .basket-delete__btn {
                 opacity: 1;
 
                 svg {
                     width: 24px;
                 }
+
                 &:hover {
                     opacity: .6;
                 }

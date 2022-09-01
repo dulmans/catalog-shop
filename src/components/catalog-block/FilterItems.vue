@@ -14,20 +14,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent, PropType } from 'vue';
 
-import {PresetCatalogOptionFilter} from '@/types/PresetCatalogOption';
+import { PresetCatalogOptionFilter } from '@/types/PresetCatalogOption';
 
 export default defineComponent({
     props: {
+        /* Массив с элементами фильтров */
         itemLists: {
             type: Array as PropType<PresetCatalogOptionFilter[]>
         }
-    },
-    setup () {
-
-
-        return {}
     }
 })
 </script>
@@ -50,7 +46,7 @@ export default defineComponent({
         border-top-right-radius: 35px;
         background: #fff;
 
-        & > *:first-child {
+        &>*:first-child {
             margin-top: 38px;
         }
 
@@ -64,10 +60,10 @@ export default defineComponent({
         }
     }
 
-    > .filter-checkbox__item {
+    >.filter-checkbox__item {
         display: inline-block;
 
-        &:not(:last-child){
+        &:not(:last-child) {
             margin-bottom: 8px;
         }
     }

@@ -1,19 +1,13 @@
 <template>
     <footer class="footer">
-        <a href="https://t.me/ulmanss" class="author">2022 @ulmanss 💓</a>
+        <a href="https://t.me/ulmanss" target="_blanc" class="author">2022 @ulmanss 💓</a>
     </footer>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-export default defineComponent({
-    setup () {
-
-
-        return {}
-    }
-})
+export default defineComponent({})
 </script>
 
 <style lang="scss" scoped>
@@ -29,6 +23,6 @@ export default defineComponent({
         color: #011AFF;
         opacity: 0.7;
         text-shadow: -2px -2px 6px, 2px 2px 6px;
-}
+    }
 }
 </style>

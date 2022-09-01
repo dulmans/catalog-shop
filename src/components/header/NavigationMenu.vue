@@ -9,13 +9,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent } from 'vue';
+
 import NavigationItem from '@/components/header/NavigationItem.vue';
 
 export default defineComponent({
-    setup() {
-        return {};
-    },
     components: { NavigationItem }
 })
 </script>

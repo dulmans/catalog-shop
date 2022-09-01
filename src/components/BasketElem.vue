@@ -2,7 +2,10 @@
     <div class="basket">
         <div class="basket-zero" v-if="totalCount <= 0">
             <span class="basket-zero__text default__text">Ваша корзина пуста &#128549;</span>
-            <span @click="hideModal" class="basket-zero__text close-modal__text">
+            <span
+                class="basket-zero__text close-modal__text"
+                @click="$emit('update:showModal', false)"
+            >
                 &gt; Но это легко исправить &#128516; &lt;
             </span>
         </div>
@@ -10,7 +13,9 @@
             <div class="basket-main-content__container">
                 <div class="basket-header">
                     <span class="basket-count header-text">{{ totalCount }} товара</span>
-                    <span class="basket-clear header-text" @click="$emit('allClear')">
+                    <span
+                        class="basket-clear header-text"
+                        @click="$emit('allClear')">
                         очистить список
                     </span>
                 </div>
@@ -21,7 +26,7 @@
                         :itemBas="item"
                         @updateCount="$emit('updateItemCount', $event)"
                         @deleteItem="$emit('deleteBasketItem', $event)"
-                        @hideModalSwitch="hideModal"
+                        @hideModalSwitch="$emit('update:showModal', false)"
                     />
                 </div>
             </div>
@@ -49,24 +54,24 @@ import { BasketLists } from '@/types/Basket';
 
 export default defineComponent({
     props: {
+        /* Отображение/ скрытие корзины */
         showModal: {
             type: Boolean as PropType<boolean>
         },
+        /* Объект с элементами корзины */
         itemLists: {
-            type: Object as PropType<BasketLists>,
+            type: Object as PropType<BasketLists>
         }
     },
-    components: { BasketItem },
-    emits: ['update:showModal', 'updateItemCount', 'deleteBasketItem', 'allClear'],
-    setup(props, { emit }) {
-        const hideModal = () => {
-            emit('update:showModal', false)
-        };
-
+    components: {
+        BasketItem
+    },
+    setup(props) {
+        /* Возвращает сумму стоимости всех товаров (игнорируя товары с пометкой "нет в наличии") */
         const totalPrice = computed((): number => {
             let totalRes = 0;
             for (const key in props?.itemLists) {
-                if (!(props?.itemLists[key].info.category.inStock)) { continue; }
+                if (!(props?.itemLists[key].info.category.inStock)) continue;
                 else {
                     totalRes += props?.itemLists[key].count * Number(props?.itemLists[key].info.mainInfo.price);
                 };
@@ -74,15 +79,19 @@ export default defineComponent({
             return totalRes;
         });
 
+        /* Возвращает сумму кол-во каждой еденицы товара  */
         const totalCount = computed((): number => {
             let totalRes = 0;
             for (const key in props?.itemLists) {
                 totalRes += props?.itemLists[key].count;
             };
             return totalRes;
-        })
+        });
 
-        return { hideModal, totalPrice, totalCount };
+        return {
+            totalPrice,
+            totalCount
+        };
     }
 })
 </script>
@@ -166,6 +175,7 @@ export default defineComponent({
         display: flex;
         justify-content: space-between;
         align-items: center;
+
         .basket-total__price {
             font-size: 16px;
             color: $color-default;
@@ -178,8 +188,6 @@ export default defineComponent({
                 margin-top: 5px;
             }
         }
-
-        .basket-btn__checkout {}
     }
 }
 </style>

@@ -20,12 +20,11 @@
         :modules="modules"
         class="slider-content"
     >
-        <component :is="'style'">
-            :root {
-                --count-slider: {{banners?.length}};
-            }
-        </component>
-        <swiper-slide v-for="(banner, index) in banners" :key="index">
+        <component :is="'style'"> :root { --count-slider: {{ banners?.length }}; } </component>
+        <swiper-slide
+            v-for="(banner, index) in banners"
+            :key="index"
+        >
             <banner-item :bannerInfo="banner" />
         </swiper-slide>
 
@@ -64,6 +63,7 @@ export default defineComponent({
         ArrowIcon
     },
     props: {
+        /* Массив с элементами баннера */
         banners: {
             type: Array as PropType<MainBanner[]>,
             requared: true
@@ -73,7 +73,7 @@ export default defineComponent({
         return {
             modules: [Pagination, Navigation, Autoplay],
         };
-    },
+    }
 })
 </script>
 

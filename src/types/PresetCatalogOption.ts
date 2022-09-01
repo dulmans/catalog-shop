@@ -21,4 +21,4 @@ interface PresetCatalogOption {
     sort: PresetCatalogOptionSort
 };
 
-export {PresetCatalogOption, PresetCatalogOptionFilter, PresetCatalogOptionSort, ValueSortLists, PresetCatalogOptionSortItemLists}
+export { PresetCatalogOption, PresetCatalogOptionFilter, PresetCatalogOptionSort, ValueSortLists, PresetCatalogOptionSortItemLists }

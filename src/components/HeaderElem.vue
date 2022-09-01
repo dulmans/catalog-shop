@@ -14,6 +14,7 @@
                 </div>
             </div>
         </transition>
+
         <div class="container-one">
             <div class="header__contain">
                 <button @click="showMobileMenu = true" class="header-btn__mobile-menu">
@@ -34,7 +35,10 @@
                 <div class="header-content__block right-content">
                     <request-call />
 
-                    <action-btns-head @openModal="$emit('update:showBacket', true)" :basketCount="basketTotalCount" />
+                    <action-btns-head
+                        @openModal="$emit('update:showBacket', true)"
+                        :basketCount="basketTotalCount"
+                    />
                 </div>
             </div>
         </div>
@@ -61,9 +65,11 @@ export default defineComponent({
         CloseIcon
     },
     props: {
+        /* Отображение/ скрытие корзины */
         showBacket: {
             type: Boolean as PropType<boolean>
         },
+        /* Кол-во товаров в корзине */
         basketTotalCount: {
             type: Number as PropType<number>
         }
@@ -72,7 +78,7 @@ export default defineComponent({
         const showMobileMenu = ref<boolean>(false);
 
         return { showMobileMenu };
-    },
+    }
 })
 </script>
 
@@ -179,6 +185,7 @@ export default defineComponent({
             svg {
                 width: 24px;
                 height: 14px;
+
                 .icon {
                     fill: $color-default;
                 }

@@ -5,20 +5,4 @@
         <path d="M7 23L3 19L7 15" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" class="icon" />
         <path d="M21 13V15C21 16.0609 20.5786 17.0783 19.8284 17.8284C19.0783 18.5786 18.0609 19 17 19H3" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" class="icon" />
     </svg>
-
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-    setup() {
-
-
-        return {}
-    }
-})
-</script>
-
-<style scoped>
-</style>
