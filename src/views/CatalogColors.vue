@@ -1,4 +1,5 @@
 <template>
+    <h2 class="page-title container-one">Краски</h2>
     <CatalogPage
         :presetData="presetOption"
         :catalogLists="itemsCatalogFilterSort"
@@ -120,6 +121,10 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.page-title {
+    @media (min-width: 960px) {
+        display: none;
+    }
+}
 </style>

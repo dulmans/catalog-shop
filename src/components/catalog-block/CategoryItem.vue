@@ -27,5 +27,10 @@ export default defineComponent({
     padding: 2px 8px;
     border-radius: 20px;
     background: rgb(105, 105, 105, .5);
+
+    @media (max-width: 800px) {
+        font-size: 10px;
+        padding: 2px 5px;
+    }
 }
 </style>

@@ -192,6 +192,12 @@ export default defineComponent({
             padding: 5px 33px;
             opacity: 0;
 
+            @media (max-width: 960px) {
+                opacity: 1;
+                background: #F2F2F2;
+                padding: 5px 12px;
+            }
+
             .button-text {
                 font-weight: 600;
                 font-size: 20px;

@@ -33,9 +33,36 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@import "@/variables.scss";
+
 .filter-items__container {
     display: inline-flex;
     flex-direction: column;
+
+    @media (max-width: 960px) {
+        padding-top: 12px;
+        padding-left: 24px;
+        position: absolute;
+        width: 100%;
+        height: 60%;
+        bottom: 0;
+        border-top-left-radius: 35px;
+        border-top-right-radius: 35px;
+        background: #fff;
+
+        & > *:first-child {
+            margin-top: 38px;
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            width: 28px;
+            height: 4px;
+            background: rgba($color-default, .6);
+            left: calc(50% - 14px);
+        }
+    }
 
     > .filter-checkbox__item {
         display: inline-block;

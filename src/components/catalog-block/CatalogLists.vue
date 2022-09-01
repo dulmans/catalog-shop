@@ -43,6 +43,18 @@ export default defineComponent({
 .catalog__items-contain {
     display: inline-grid;
     gap: 16px 24px;
-    grid-template-columns: repeat(5, 1fr);
+    width: 100%;
+    grid-template-columns: repeat(auto-fill, 278px);
+    justify-content: space-between;
+
+    @media (max-width: 1550px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: 960px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: 800px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 </style>

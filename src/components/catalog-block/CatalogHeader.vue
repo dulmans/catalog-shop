@@ -1,6 +1,7 @@
 <template>
     <div class="catalog-header">
         <div v-if="darkFocus" class="dark-focus-bg"></div>
+        <span class="catalog-header__count-items filter-text" @click="$emit('update:showFilter', true)">Фильтры</span>
         <span class="catalog-header__count-items">{{itemLength ?? 0}} товаров</span>
         <div class="catalog-header__sort-list">
             <my-options-list
@@ -24,6 +25,9 @@ export default defineComponent({
         },
         sortByInfo: {
             type: Object as PropType<PresetCatalogOptionSort>
+        },
+        showFilter: {
+            type: Boolean as PropType<Boolean>
         }
     },
     setup () {
@@ -42,11 +46,28 @@ export default defineComponent({
     justify-content: space-between;
     align-items: center;
 
+    .catalog-header__sort-list {
+        font-size: 0;
+    }
+
     .catalog-header__count-items {
         color: $color-default;
         font-weight: 500;
         font-size: 12px;
         text-transform: uppercase;
+        display: none;
+
+        @media (min-width: 960px) {
+            &:not(.filter-text) {
+                display: inline-block
+            }
+        }
+
+        @media (max-width: 960px) {
+            &.filter-text {
+                display: inline-block;
+            }
+        }
     }
 }
 

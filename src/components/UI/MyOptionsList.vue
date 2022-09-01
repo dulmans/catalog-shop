@@ -106,6 +106,10 @@ input {
     flex-direction: column;
     position: relative;
 
+    @media (max-width: 960px) {
+        z-index: 8;
+    }
+
     input {
         height: 0;
         width: 0;
@@ -119,6 +123,10 @@ input {
         display: inline-flex;
         align-items: center;
         padding: 0 24px;
+
+        @media (max-width: 650px) {
+            width: unset;
+        }
     }
 
     .current-value__area {

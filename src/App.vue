@@ -22,13 +22,13 @@
                 <text-pagination :pages="mainPaginationText" />
                 <slider-banner :banners="mainBannerArray" />
             </div>
-            <!-- <main class="main__content">
-                <div class="main__content--container container-one">
+            <main class="main__content">
+                <div class="main__content--container">
                     <catalog-colors
                         @addNewBasketItem="basketAction.addItem"
                     />
                 </div>
-            </main> -->
+            </main>
             <footer-elem />
         </div>
     </div>
@@ -170,40 +170,51 @@ export default defineComponent({
             height: unset;
         }
     }
-}
 
-a {
-    text-decoration: none;
-}
-
-.container-one {
-    padding: 0 65px;
-
-    @media (max-width: 900px) {
-        padding: 0 50px;
+    .page-title {
+        margin: 48px 0;
+        font-size: 36px;
+        font-weight: 400;
+        color: $color-default;
     }
-    @media (max-width: 700px) {
-        padding: 0 35px;
-    }
-    @media (max-width: 500px) {
-        padding: 0 25px;
-    }
-}
 
-.dark-focus-bg {
-    position: absolute;
-    z-index: 98;
-    background: rgba(0, 0, 0, .6);
-    width: 100%;
-    height: 100%;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-}
+    a {
+        text-decoration: none;
+    }
 
-.main__content {
-    background: rgb(255, 255, 255);
+    .container-one {
+        padding: 0 65px;
+
+        @media (max-width: 900px) {
+            padding: 0 50px;
+        }
+        @media (max-width: 700px) {
+            padding: 0 35px;
+        }
+        @media (max-width: 500px) {
+            padding: 0 25px;
+        }
+    }
+
+    .dark-focus-bg {
+        position: absolute;
+        z-index: 98;
+        background: rgba(0, 0, 0, .6);
+        width: 100%;
+        height: 100%;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+
+        @media (max-width: 960px) {
+            z-index: 7;
+        }
+    }
+
+    .main__content {
+        background: rgb(255, 255, 255);
+    }
 }
 
 .basket-enter-active,
