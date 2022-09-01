@@ -93,7 +93,7 @@ export default defineComponent({
     background: rgb(255, 255, 255);
 
     @media (max-width: 960px) {
-        position: fixed;
+        position: sticky;
         z-index: 9;
         width: 100%;
         top: 0;

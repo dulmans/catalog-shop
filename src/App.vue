@@ -22,13 +22,13 @@
                 <text-pagination :pages="mainPaginationText" />
                 <slider-banner :banners="mainBannerArray" />
             </div>
-            <main class="main__content">
+            <!-- <main class="main__content">
                 <div class="main__content--container container-one">
                     <catalog-colors
                         @addNewBasketItem="basketAction.addItem"
                     />
                 </div>
-            </main>
+            </main> -->
             <footer-elem />
         </div>
     </div>
@@ -164,6 +164,11 @@ export default defineComponent({
         position: relative;
         width: 100%;
         height: 560px;
+
+        @media (max-width: 500px) {
+            position: static;
+            height: unset;
+        }
     }
 }
 

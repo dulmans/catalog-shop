@@ -42,6 +42,11 @@ export default defineComponent({
 
     .banner-content{
         max-width: 25%;
+
+        @media (max-width: 1000px) {
+            max-width: 70%;
+        }
+
         .banner-text{
             color: rgb(255, 255, 255);
             text-align: center;

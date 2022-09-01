@@ -87,6 +87,10 @@ $padding-pagination-bulletLR: 4px;
     height: 100%;
     width: 100%;
 
+    @media (max-width: 500px) {
+        display: none;
+    }
+
     .swiper-pagination-contain {
         position: absolute;
         z-index: 1;
@@ -135,6 +139,10 @@ $padding-pagination-bulletLR: 4px;
         cursor: pointer;
         transition: all .1s ease;
         padding: 20px 30px;
+
+        @media (max-width: 1000px) {
+            display: none;
+        }
 
         &.swiper-button-prev {
             transform: rotate(180deg);

@@ -32,6 +32,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@import "@/variables.scss";
+
 $padding-eclipse: 8px;
 $size-eclipse: 3px;
 $color-elems: #fff;
@@ -68,6 +70,27 @@ $color-elems: #fff;
 
         &:hover{
             color: rgba($color-elems, 1);
+        }
+    }
+
+    @media (max-width: 500px) {
+        $color-elems: $color-default;
+
+        position: static;
+        z-index: unset;
+        margin: 16px 0 48px;
+
+        & > *:not(:last-child) {
+            &::after {
+                background-color: rgba($color-elems, .3);
+            }
+        }
+        .pagination-text__item {
+            color: rgba($color-elems, .3);
+
+            &:hover{
+                color: rgba($color-elems, 1);
+            }
         }
     }
 }
