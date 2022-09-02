@@ -133,7 +133,9 @@ export default defineComponent({
 
     .product-image {
         max-width: 100%;
+        flex-grow: 1;
         position: relative;
+        background: rgba($color-default, 0.1);
 
         .text__not-available {
             position: absolute;
